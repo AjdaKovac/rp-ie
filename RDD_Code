@@ -1,0 +1,43 @@
+library(rdd)
+library(devtools)
+library(dplyr)
+library(rdrobust)
+install.packages("stargazer")
+library(stargazer)
+install_github("bquast/rddtools")
+
+library(rddtools)
+
+#Creating RDD Data
+
+#Code for trimming of the data (currently unnecessary)
+#newdata <- QE[ which(QE$NumericDate >= -24 ), ]
+# <- newdata[ which(newdata$NumericDate <= 24 ), ]
+
+data <- rdd_data(QE_HF$`USD/EUR`, QE_HF$Obsv, cutpoint = 0)
+#Creating data in log for percentage impact
+
+logdata <-rdd_data(log(QE_HF$`USD/EUR`), QE_HF$Obsv, cutpoint = 0)
+
+rdplot(data$y, data$x, p=1,
+       x.lim = c(-1100,1100),
+       y.lim = c(0.70,0.8),
+       x.lab="Minutes",
+       y.lab="USDEUR", title = "")
+
+rdd_reg_lm(
+  logdata,
+  covariates = NULL,
+  order = 1,
+  bw = NULL,
+  slope = "same"
+)
+
+#Creating Table in Stargazer for Latex
+stargazer(rdd_reg_lm(
+  logdata,
+  covariates = NULL,
+  order = 1,
+  bw = NULL,
+  slope = "same" 
+))
