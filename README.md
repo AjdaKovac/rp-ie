@@ -1,7 +1,11 @@
 ### R&P IE project
 
-A short summary of what has to be done:
+Project so far:
 
-* collect relevant data, add in folder "data"
-* literature: there is a folder "summaries" where we can summarise relevant articles that are in "literature"
-* code: will follow after we collect data
+* data✅
+* literature✅
+* code✅
+
+What has yet to be done:
+
+* check our econometrics with paper "RDD in time for empirical applications"
